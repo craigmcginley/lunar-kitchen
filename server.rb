@@ -20,5 +20,6 @@ end
 
 get '/recipes/:id' do
   @recipe = Recipe.find(params[:id])
+  binding.pry
   erb :'recipes/show'
 end
