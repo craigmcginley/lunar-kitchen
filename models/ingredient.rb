@@ -3,16 +3,16 @@ class Ingredient
 
   def self.all
     temp = []
-    ingredients = []
-    connection = PG.connect(dbname: 'recipe_box')
-    temp = connection.exec("SELECT ingredients.name, ingredients.recipe_id FROM ingredients")
+    @ingredients = []
+    connection = PG.connect(dbname: 'recipes')
+    temp = connection.exec("SELECT * FROM ingredients")
     connection.close
 
     temp.each do |ingredient|
-      ingredients << Ingredient.new(ingredient["name"], ingredient["recipe_id"])
+      @ingredients << Ingredient.new(ingredient["name"], ingredient["recipe_id"])
     end
 
-    ingredients
+    @ingredients
   end
 
   def initialize(name, recipe_id)
